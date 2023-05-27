@@ -1,78 +1,82 @@
 import React from 'react'
 import { useState } from 'react'
 
-function UserParticipation() {
-    const [JsCount,setJsCount]=useState(0)
-    const [PyCount,setPyCount]=useState(0)
-    const [JavaCount,setJavaCount]=useState(0)
-    const [CsCount,setCsCount]=useState(0)
 
+
+function UserParticipation() {
+  const [JsCount, setJsCount] = useState(0);
+  const [PyCount, setPyCount] = useState(0);
+  const [JavaCount, setJavaCount] = useState(0);
+  const [CsCount, setCsCount] = useState(0);
+
+  const handleCheckboxChange = (event, countUpdater) => {
+    const checkbox = event.target;
+    if (checkbox.checked) {
+      // Increment the count
+      countUpdater((prevCount) => prevCount + 1);
+      // Uncheck other checkboxes
+      uncheckOtherCheckboxes(checkbox);
+    } else {
+      // Checkbox was unchecked, you can handle this case if needed
+    }
+  };
+
+  const uncheckOtherCheckboxes = (checkedCheckbox) => {
+    const checkboxes = document.getElementsByName("checkbox");
+    checkboxes.forEach((checkbox) => {
+      if (checkbox !== checkedCheckbox) {
+        checkbox.checked = false;
+      }
+    });
+  };
 
   return (
     <div>
-      
-      <h3>Answer the Choices Select</h3>
+      <h3>Answer the Choices:</h3>
 
-      
-      
-      <input type="checkbox" id="one" name="checkbox" onSelect={()=>{const checkbox = document.getElementById('one')
+      <label>
+        <input
+          type="checkbox"
+          name="checkbox"
+          onChange={(event) => handleCheckboxChange(event, setJsCount)}
+        />
+        JavaScript
+      </label>
+      <h2>Total JavaScript Votes: {JsCount}</h2>
 
-checkbox.addEventListener('change', (event) => {
-  if (event.currentTarget.checked) {
-    JsCount=setJsCount(prevCount=>prevCount+1)
-  } else {
-    alert('not checked');
-  }
-})}} />
-      <label for="one">JavaScript</label>
-      <h2>Total JavaScript Votes: {JsCount}</h2><br />
+      <label>
+        <input
+          type="checkbox"
+          name="checkbox"
+          onChange={(event) => handleCheckboxChange(event, setPyCount)}
+        />
+        Python
+      </label>
+      <h2>Total Python Votes: {PyCount}</h2>
 
-     
-      <input type="checkbox" id="two" name="checkbox" onSelect={()=>{const checkbox = document.getElementById('two')
+      <label>
+        <input
+          type="checkbox"
+          name="checkbox"
+          onChange={(event) => handleCheckboxChange(event, setJavaCount)}
+        />
+        Java
+      </label>
+      <h2>Total Java Votes: {JavaCount}</h2>
 
-checkbox.addEventListener('change', (event) => {
-  if (event.currentTarget.checked) {
-    PyCount=setPyCount(prevCount=>prevCount+1)
-  } else {
-    alert('not checked');
-  }
-})}} />
-      <label for="two">Python</label>
-      <h2>Total Python Votes: {PyCount}</h2> <br />
-
-
-
-      <input type="checkbox" id="three" name="checkbox" onSelect={()=>{const checkbox = document.getElementById('three')
-
-checkbox.addEventListener('change', (event) => {
-  if (event.currentTarget.checked) {
-    JavaCount=setJavaCount(prevCount=>prevCount+1)
-  } else {
-    alert('not checked');
-  }
-})}} />
-      <label for="three">Java</label>
-      <h2>Total Java Votes: {JavaCount}</h2> <br />
-
-      
-      <input type="checkbox" id="four" name="checkbox" onSelect={()=>{const checkbox = document.getElementById('three')
-
-checkbox.addEventListener('change', (event) => {
-  if (event.currentTarget.checked) {
-    CsCount=setCsCount(prevCount=>prevCount+1)
-  } else {
-    alert('not checked');
-  }
-})}} />
-      <label for="four">CSharp</label>
+      <label>
+        <input
+          type="checkbox"
+          name="checkbox"
+          onChange={(event) => handleCheckboxChange(event, setCsCount)}
+        />
+        CSharp
+      </label>
       <h2>Total CSharp Votes: {CsCount}</h2>
-      
-
-      
-      
-
     </div>
-  )
+  );
 }
+
+
 
 export default UserParticipation
