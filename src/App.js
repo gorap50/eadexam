@@ -1,10 +1,11 @@
 
 import './App.css';
+import PollDisplay from './components/PollDisplay';
 
 function App() {
   return (
     <div className="App">
-      Hello world
+      <PollDisplay/>
     </div>
   );
 }
